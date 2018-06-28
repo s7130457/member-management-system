@@ -4,7 +4,7 @@
     <h2>Essential Links</h2>
     <ul>
       <li><router-link to="/signin">Sign in</router-link></li>
-      <li><router-link to="/signup">Sign up</router-link></li>
+      <li><router-link to="/login">Log in</router-link></li>
     </ul>
 
   </div>

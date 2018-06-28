@@ -1,18 +1,18 @@
 <template>
-  <div class="signin" id="signin">
+  <div class="login" id="login">
     <div>
       <h1>{{ msg }}</h1>
       <h3>Hello, this is a {{ msg }} page.</h3>
     </div>
     <div class="container">
-      <form v-on:submit.prevent="doSignin">
+      <form v-on:submit.prevent="doLogin">
         <div class="form-group">
           <label for="account">Account</label>
-          <input type="text" v-model="signin.account" id="account" placeholder="Enter account">
+          <input type="text" v-model="login.account" id="account" placeholder="Enter account">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password"  v-model="signin.password" id="password" placeholder="Enter password">
+          <input type="password"  v-model="login.password" id="password" placeholder="Enter password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -24,23 +24,22 @@
 import axios from 'axios'
 
 export default {
-  name: 'signin',
+  name: 'login',
   data () {
     return {
-      msg: 'Sign in ',
-      signin: {
+      msg: 'Log in ',
+      login: {
         account: '',
         password: ''
       }
-
     }
   },
   methods: {
-    doSignin: function () {
+    doLogin: function () {
       let self = this
-      axios.post('http://localhost:3100/admins/addAdmin', this.signin)
+      axios.get('http://localhost:3100/admins/' + this.login.account, this.login)
         .then(function (response) {
-          self.$router.push('/')
+          self.$router.push({path: '/admin/' + response.data[0].account, params: {account: response.data[0].account}})
         }).catch(function (err) {
           console.error(err)
         })
