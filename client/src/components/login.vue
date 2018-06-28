@@ -41,25 +41,11 @@
         <b-button  class="float-left" type="reset" variant="primary" @click="reset">
           Reset
         </b-button>
-        <b-button  class="float-right" type="submit" variant="danger" @click="doSignin">
-          Sign in
+        <b-button  class="float-right" type="submit" variant="danger" @click="doLogin">
+          Log in
         </b-button>
       </b-form>
     </b-container>
-
-    <!-- <div class="container">
-      <form v-on:submit.prevent="doLogin">
-        <div class="form-group">
-          <label for="account">Account</label>
-          <input type="text" v-model="login.account" id="account" placeholder="Enter account">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password"  v-model="login.password" id="password" placeholder="Enter password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div> -->
   </div>
 </template>
 
@@ -83,13 +69,14 @@ export default {
   methods: {
     doLogin: function () {
       let self = this
+      if (!self.login.account || !self.login.password) { return }
       axios.get('http://localhost:3100/admins/' + this.login.account, this.login)
         .then(function (response) {
           self.$router.push({path: '/admin/' + response.data[0].account, params: {account: response.data[0].account}})
         }).catch(function (error) {
           console.error(error)
           self.showOnlyTime = self.showAlertTime
-          self.alert = error
+          self.alert = 'Account or password error!'
           self.reset()
         })
     },

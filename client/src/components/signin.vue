@@ -2,7 +2,7 @@
   <div class="signin" id="signin">
     <div>
       <h1>{{ msg }}</h1>
-    </div>
+    </div><br><br>
     <b-container>
       <b-alert variant="danger"
               dismissible
@@ -74,6 +74,7 @@ export default {
     },
     doSignin: function () {
       let self = this
+      if (!self.signin.account || !self.signin.password) { return }
       axios.post('http://localhost:3100/admins/addAdmin', this.signin)
         .then(function (response) {
           if (response.data.error) {
