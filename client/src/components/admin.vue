@@ -1,7 +1,7 @@
 <template>
   <div class="admin" id="admin">
     <div>
-      <h1>Welcome {{this.$route.params.account}}.</h1>
+      <h1>Welcome to here, {{this.$route.params.account}}</h1>
     </div>
     <div class="container"> <br>
       <div>
@@ -92,6 +92,7 @@ export default {
   },
   methods: {
     getMembers () {
+      console.log(this.$route.params)
       let self = this
       axios.get('http://localhost:3100/members?account=' + this.$route.params.account)
         .then(function (response) {

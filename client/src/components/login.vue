@@ -2,7 +2,6 @@
   <div class="login" id="login">
     <div>
       <h1>{{ msg }}</h1>
-      <h3>Hello, this is a {{ msg }} page.</h3>
     </div>
     <div class="container">
       <form v-on:submit.prevent="doLogin">

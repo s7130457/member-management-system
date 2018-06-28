@@ -29,6 +29,8 @@ router.get('/login', function (req, res, next) {
 router.post('/login', function (req, res, next) {
     AdminDB.find({ 'account': req.body.adminID, 'password': req.body.password }).then(function (result) {
         if (result.length == 0) {
+            
+    
             // req.flash('msg','invalid account');
             // res.locals.messages = req.flash();
             res.send('return login page and show account/pwd error')

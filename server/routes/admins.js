@@ -14,18 +14,19 @@ router.get('/:account', function (req, res) {
 
 /* POST Add admin. */
 router.post('/addAdmin', function (req, res) {
-    console.log('add Admin ')
     AdminDB.find({ "account": req.body.account }).then(function (result) {
         console.log("check admin has been used = " + result)
         return result
     }).then(function (result) {
+        console.log('addAdmin')
+        console.log(result)
         if (result.length == 0) {
             AdminDB.create(req.body).then(function (admin) {
                 console.log(admin)
                 res.send("Add admin=\n" + admin)
             })
         } else {
-            res.status(400)
+            res.send({ error: 'Repeat Account' });
         }
 
     })

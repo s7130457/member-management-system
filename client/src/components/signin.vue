@@ -2,21 +2,51 @@
   <div class="signin" id="signin">
     <div>
       <h1>{{ msg }}</h1>
-      <h3>Hello, this is a {{ msg }} page.</h3>
     </div>
-    <div class="container">
-      <form v-on:submit.prevent="doSignin">
-        <div class="form-group">
-          <label for="account">Account</label>
-          <input type="text" v-model="signin.account" id="account" placeholder="Enter account">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password"  v-model="signin.password" id="password" placeholder="Enter password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+    <b-container>
+      <b-alert variant="danger"
+              dismissible
+              fade
+              :show="showOnlyTime"
+              @dismissed="showOnlyTime=0"
+              >
+        {{alert}}
+      </b-alert>
+      <b-form >
+        <b-form-group id="account"
+                horizontal
+                :label-cols="6"
+                breakpoint="md"
+                label="Admin account"
+                label-for="accountInput">
+
+          <b-form-input id="accountInput"
+                    type="text"
+                    v-model="signin.account"
+                    required>
+          </b-form-input>
+        </b-form-group>
+
+        <b-form-group id="password"
+                horizontal
+                :label-cols="6"
+                breakpoint="md"
+                label="Admin password"
+                label-for="passwordInput">
+          <b-form-input id="passwordInput"
+                    type="password"
+                    v-model="signin.password"
+                    required>
+          </b-form-input>
+        </b-form-group>
+        <b-button  class="float-left" type="reset" variant="primary" @click="reset">
+          Reset
+        </b-button>
+        <b-button  class="float-right" type="submit" variant="danger" @click="doSignin">
+          Sign in
+        </b-button>
+      </b-form>
+    </b-container>
   </div>
 </template>
 
@@ -31,20 +61,43 @@ export default {
       signin: {
         account: '',
         password: ''
-      }
+      },
+      showAlertTime: 5,
+      showOnlyTime: 0,
+      alert: ''
 
     }
   },
   methods: {
+    timeChanged (time) {
+      this.showOnlyTime = time
+    },
     doSignin: function () {
       let self = this
       axios.post('http://localhost:3100/admins/addAdmin', this.signin)
         .then(function (response) {
-          self.$router.push('/')
+          if (response.data.error) {
+            self.showOnlyTime = self.showAlertTime
+            self.alert = response.data.error
+            self.reset()
+          } else {
+            self.$router.push({path: '/admin/' + self.signin.account, params: {account: self.signin.account}})
+          }
         }).catch(function (err) {
           console.error(err)
         })
+    },
+    reset () {
+      this.signin = {
+        account: '',
+        password: ''
+      }
     }
   }
 }
 </script>
+<style>
+.container {
+    max-width: 500px;
+}
+</style>

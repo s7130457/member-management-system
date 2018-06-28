@@ -1,10 +1,14 @@
 <template>
   <div class="index">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><router-link to="/signin">Sign in</router-link></li>
-      <li><router-link to="/login">Log in</router-link></li>
+
+    <ul><br>
+      <li>
+        <b-button  :pressed="false" variant="primary" size="lg" to="/signin" >Sign in</b-button>
+      </li>
+      <li>
+        <b-button  :pressed="false" variant="danger" size="lg" to="/login">Log in</b-button>
+      </li>
     </ul>
 
   </div>
@@ -15,13 +19,13 @@ export default {
   name: 'index',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Vue.js App'
+
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
