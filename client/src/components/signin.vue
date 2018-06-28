@@ -3,7 +3,7 @@
     <div>
       <h1>{{ msg }}</h1>
     </div><br><br>
-    <b-container>
+    <b-container id="signinContainer">
       <b-alert variant="danger"
               dismissible
               fade
@@ -106,7 +106,7 @@ export default {
 }
 </script>
 <style>
-.container {
+#signinContainer {
     max-width: 500px;
 }
 </style>
