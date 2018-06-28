@@ -38,13 +38,21 @@
                     v-model="signin.password"
                     required>
           </b-form-input>
-        </b-form-group>
-        <b-button  class="float-left" type="reset" variant="primary" @click="reset">
-          Reset
-        </b-button>
-        <b-button  class="float-right" type="submit" variant="danger" @click="doSignin">
-          Sign in
-        </b-button>
+        </b-form-group><br>
+        <b-container class="bv-example-row">
+          <b-row>
+            <b-col>
+              <b-button   type="reset" variant="primary" @click="reset">
+                Reset
+              </b-button>
+            </b-col>
+            <b-col>
+              <b-button   type="submit" variant="danger" @click="doSignin">
+                Sign in
+              </b-button>
+            </b-col>
+          </b-row>
+        </b-container>
       </b-form>
     </b-container>
   </div>
