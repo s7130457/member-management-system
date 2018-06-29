@@ -14,7 +14,7 @@
                 <b-form>
                   <b-form-group id="memberName"
                                 horizontal
-                                :label-cols="6"
+                                :label-cols="5"
                                 breakpoint="md"
                                 label="Member name"
                                 label-for="memberNameInput">
@@ -29,7 +29,7 @@
 
                   <b-form-group id="memberBirthday"
                                 horizontal
-                                :label-cols="6"
+                                :label-cols="5"
                                 breakpoint="md"
                                 label="Member birthday"
                                 label-for="memberBirthdayInput">
@@ -43,13 +43,13 @@
                   </b-form-group>
                   <b-form-group id="memberSex"
                                 horizontal
-                                :label-cols="6"
+                                :label-cols="5"
                                 breakpoint="md"
                                 label="Member Sex"
                                 label-for="memberSexRadio">
                     <b-form-radio-group id="memberSexRadio"
-                              v-model="member.sex"
-                              :options="sex">
+                                        v-model="member.sex"
+                                        :options="sex">
                     </b-form-radio-group>
                   </b-form-group>
 
@@ -60,12 +60,12 @@
                 <b-container class="bv-example-row">
                   <b-row>
                     <b-col>
-                      <b-button   type="reset" variant="danger" @click="reset">
+                      <b-button type="reset" variant="danger" @click="reset">
                         Reset
                       </b-button>
                     </b-col>
                     <b-col>
-                      <b-button   type="submit" variant="primary" @click="createMember">
+                      <b-button type="submit" variant="primary" @click="createMember">
                         Create
                       </b-button>
                     </b-col>
@@ -149,7 +149,7 @@ export default {
       if (checkName && checkBirthday) { return true } else { return false }
     },
     verifyNameText () {
-      if (!this.member.name) {
+      if (!this.member.name.trim()) {
         this.validateName = false
         return false
       } else {
@@ -158,7 +158,7 @@ export default {
       }
     },
     validateBirthdayText () {
-      if (!this.member.birthday) {
+      if (!this.member.birthday.trim()) {
         this.validateBirthday = false
         return false
       } else {
