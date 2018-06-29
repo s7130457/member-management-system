@@ -26,7 +26,7 @@
                       label="Birthday"
                       label-for="memberBirthdayInput">
           <b-form-input id="memberBirthdayInput"
-                        type="text"
+                        type="date"
                         v-model="member.birthday"
                         :state="validateBirthday"
                         placeholder="YYYY/MM/DD"

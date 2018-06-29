@@ -34,11 +34,11 @@
                                 label="Member birthday"
                                 label-for="memberBirthdayInput">
                     <b-form-input id="memberBirthdayInput"
-                              type="text"
-                              v-model="member.birthday"
-                              placeholder="YYYY/MM/DD"
-                              :state="validateBirthday"
-                              v-on:change="verify">
+                                  type="date"
+                                  v-model="member.birthday"
+                                  placeholder="YYYY/MM/DD"
+                                  :state="validateBirthday"
+                                  v-on:change="verify">
                     </b-form-input>
                   </b-form-group>
                   <b-form-group id="memberSex"
