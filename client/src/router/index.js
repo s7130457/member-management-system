@@ -3,15 +3,12 @@ import Router from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Vuelidate from 'vuelidate'
 
 import index from '@/components/index'
 import register from '@/components/register'
 import login from '@/components/login'
 import admin from '@/components/admin'
 import editMember from '@/components/editMember'
-Vue.use(Vuelidate)
-Vue.use(require('vue-moment'))
 Vue.use(BootstrapVue)
 Vue.use(Router)
 
