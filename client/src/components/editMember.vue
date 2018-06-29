@@ -46,16 +46,6 @@
             </b-form-radio-group>
           </b-input-group>
         </b-form-group>
-
-        <!-- <div> -->
-
-        <!-- <b-btn  class="float-left" variant="primary" @click="getMember">
-          Reset
-        </b-btn>
-        </div>
-        <b-btn  class="float-right" variant="danger" @click="update">
-          Update
-        </b-btn> -->
       </b-form>
       <div slot="modal-footer" class="w-100">
           <b-container class="bv-example-row">
@@ -107,6 +97,7 @@ export default {
         this.validateName = false
         return false
       } else {
+        this.member.name = this.member.name.trim()
         this.validateName = true
         return true
       }
@@ -116,6 +107,7 @@ export default {
         this.validateBirthday = false
         return false
       } else {
+        this.member.birthday = this.member.birthday.trim()
         this.validateBirthday = true
         return true
       }

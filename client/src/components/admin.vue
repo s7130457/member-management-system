@@ -153,6 +153,7 @@ export default {
         this.validateName = false
         return false
       } else {
+        this.member.name = this.member.name.trim()
         this.validateName = true
         return true
       }
@@ -162,6 +163,7 @@ export default {
         this.validateBirthday = false
         return false
       } else {
+        this.member.birthday = this.member.birthday.trim()
         this.validateBirthday = true
         return true
       }
