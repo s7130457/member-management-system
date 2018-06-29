@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const app = express(); //建立一個Express伺服器
 
 
-const index = require('./routes/index');
 const admins = require('./routes/admins');
 const members = require('./routes/members')
 
@@ -34,7 +33,7 @@ app.use("*", function (req, res, next) {
 });
 
 
-app.use('/', index);
+
 app.use('/admins', admins);
 app.use('/members', members);
 
