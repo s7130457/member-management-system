@@ -6,7 +6,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuelidate from 'vuelidate'
 
 import index from '@/components/index'
-import signin from '@/components/signin'
+import register from '@/components/register'
 import login from '@/components/login'
 import admin from '@/components/admin'
 import editMember from '@/components/editMember'
@@ -23,9 +23,9 @@ export default new Router({
       component: index
     },
     {
-      path: '/signin',
-      name: 'signin',
-      component: signin
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {
       path: '/login',
