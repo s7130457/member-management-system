@@ -78,13 +78,15 @@ export default {
     doLogin: function () {
       let self = this
       if (!self.login.account || !self.login.password) { return }
-      axios.get('http://localhost:3100/admins/' + this.login.account, this.login)
+      axios.post('http://localhost:3100/login', this.login)
         .then(function (response) {
-          self.$router.push({path: '/admin/' + response.data[0].account, params: {account: response.data[0].account}})
-        }).catch(function (error) {
-          console.error(error)
+          self.$router.push({path: '/admin/' + response.data.account, params: {account: response.data.account}})
+          // alert('login sruuess' + response.data)
+        }).catch(function (err) {
+          // alert('login fail' + error.response)
+          console.error(err.response)
           self.showOnlyTime = self.showAlertTime
-          self.alert = 'Account or password error!'
+          self.alert = err.response.data.error
           self.reset()
         })
     },
