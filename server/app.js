@@ -39,11 +39,23 @@ app.use(session({
   name: 'backend',
   // store: new RedisStore(options),
   cookie: {
-      maxAge: 1000 * 60 * 60,
-  },// 1h
+      maxAge: 1000 * 60 * 60 * 24,
+  },// 1 day
   resave: true,
   saveUninitialized: true,
 }));
+// /**
+//  *  中间件
+//  *  接口请求之后，更新session的时间
+//  *  use this middleware to reset cookie expiration time
+//  *  when user hit page every time
+//  **/
+// app.use(function (req, res, next) {
+//   req.session._garbage = Date();
+//   req.session.touch();
+//   next();
+// });
+
 
 app.use('/', index);
 app.use('/admins', admins);

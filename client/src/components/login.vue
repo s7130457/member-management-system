@@ -80,11 +80,14 @@ export default {
       if (!self.login.account || !self.login.password) { return }
       axios.post('http://localhost:3100/login', this.login)
         .then(function (response) {
-          self.$router.push({path: '/admin/' + response.data.account, params: {account: response.data.account}})
-          // alert('login sruuess' + response.data)
+          console.log(response)
+          self.$store.dispatch('setToken', response.data.token)
+          self.$store.dispatch('setUser', response.data.admin)
+          console.log('store')
+          console.log(self.store)
+          self.$router.push({path: '/admin/' + response.data.admin.account, params: {account: response.data.admin.account}})
         }).catch(function (err) {
-          // alert('login fail' + error.response)
-          console.error(err.response)
+          // console.error(err.response)
           self.showOnlyTime = self.showAlertTime
           self.alert = err.response.data.error
           self.reset()
