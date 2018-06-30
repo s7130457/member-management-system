@@ -2,6 +2,9 @@
   <div class="edit" id="edit">
     <div>
       <h1>Edit Member page</h1>
+      <b-button variant="primary" @click="reset">
+        Log out
+      </b-button>
     </div><br>
     <b-container id="loginContainer">
       <b-form >
