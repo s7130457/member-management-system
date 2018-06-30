@@ -26,7 +26,7 @@ router.post('/addAdmin', function (req, res) {
                 res.send("Add admin=\n" + admin)
             })
         } else {
-            res.send({ error: 'Repeat Account' });
+            res.status(500).send({ error: 'Repeat Account' });
         }
 
     })

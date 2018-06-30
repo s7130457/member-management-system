@@ -118,15 +118,12 @@ export default {
       }
       axios.post('http://localhost:3100/admins/addAdmin', this.register)
         .then(function (response) {
-          if (response.data.error) {
-            self.showOnlyTime = self.showAlertTime
-            self.alert = response.data.error
-            self.reset()
-          } else {
-            self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
-          }
-        }).catch(function (err) {
-          console.error(err)
+          self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
+        }).catch(function (error) {
+          console.error(error)
+          self.showOnlyTime = self.showAlertTime
+          self.alert = error.response.data.error
+          self.reset()
         })
     },
     reset () {
