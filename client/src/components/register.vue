@@ -16,7 +16,7 @@
                       horizontal
                       :label-cols="6"
                       breakpoint="md"
-                      label="Admin account"
+                      label="User account"
                       label-for="accountInput">
           <b-form-input id="accountInput"
                         type="text"
@@ -31,12 +31,26 @@
                       horizontal
                       :label-cols="6"
                       breakpoint="md"
-                      label="Admin password"
+                      label="User password"
                       label-for="passwordInput">
           <b-form-input id="passwordInput"
                         type="password"
                         v-model="register.password"
                         :state="validatePassword"
+                        v-on:change="verify"
+                        required>
+          </b-form-input>
+        </b-form-group>
+        <b-form-group id="confirmPassword"
+                      horizontal
+                      :label-cols="6"
+                      breakpoint="md"
+                      label="Confirm password"
+                      label-for="confirmPasswordInput">
+          <b-form-input id="confirmPasswordInput"
+                        type="password"
+                        v-model="confirmPassword"
+                        :state="validateConfirmPassword"
                         v-on:change="verify"
                         required>
           </b-form-input>
@@ -71,10 +85,12 @@ export default {
       msg: 'Register',
       validateAccount: null,
       validatePassword: null,
+      validateConfirmPassword: null,
       register: {
         account: '',
         password: ''
       },
+      confirmPassword: '',
       showAlertTime: 5,
       showOnlyTime: 0,
       alert: ''
@@ -85,7 +101,8 @@ export default {
     verify  () {
       let checkAccount = this.verifyAccountText()
       let checkPassword = this.validatePasswordText()
-      if (checkAccount && checkPassword) { return true } else { return false }
+      let confirmPassword = this.validateConfirmPasswordText()
+      if (checkAccount && checkPassword && confirmPassword) { return true } else { return false }
     },
     verifyAccountText () {
       if (!this.register.account.trim()) {
@@ -107,26 +124,37 @@ export default {
         return true
       }
     },
+    validateConfirmPasswordText () {
+      if (this.confirmPassword.trim() !== this.register.password.trim()) {
+        this.validateConfirmPassword = false
+        this.validatePassword = false
+        this.showOnlyTime = this.showAlertTime
+        this.alert = 'Password is not same.'
+        return false
+      } else {
+        this.validateConfirmPassword = true
+        return true
+      }
+    },
     timeChanged (time) {
       this.showOnlyTime = time
     },
     doRegister: function () {
       let self = this
-      if (!self.register.account.trim() || !self.register.password.trim()) {
-        // this.reset()
-        return
+      let isSamePossword = self.register.password.trim() === self.confirmPassword.trim()
+      if (self.register.account.trim() && self.register.password.trim() && isSamePossword) {
+        axios.post('http://localhost:3100/admins/addAdmin', this.register)
+          .then(function (response) {
+            self.$store.dispatch('setToken', response.data.token)
+            self.$store.dispatch('setUser', response.data.admin)
+            self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
+          }).catch(function (error) {
+            console.error(error)
+            self.showOnlyTime = self.showAlertTime
+            self.alert = error.response.data.error
+            self.reset()
+          })
       }
-      axios.post('http://localhost:3100/admins/addAdmin', this.register)
-        .then(function (response) {
-          self.$store.dispatch('setToken', response.data.token)
-          self.$store.dispatch('setUser', response.data.admin)
-          self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
-        }).catch(function (error) {
-          console.error(error)
-          self.showOnlyTime = self.showAlertTime
-          self.alert = error.response.data.error
-          self.reset()
-        })
     },
     reset () {
       this.register = {
