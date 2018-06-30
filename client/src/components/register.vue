@@ -118,6 +118,8 @@ export default {
       }
       axios.post('http://localhost:3100/admins/addAdmin', this.register)
         .then(function (response) {
+          self.$store.dispatch('setToken', response.data.token)
+          self.$store.dispatch('setUser', response.data.admin)
           self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
         }).catch(function (error) {
           console.error(error)

@@ -2,9 +2,6 @@
   <div class="admin" id="admin">
     <div>
       <h1>Welcome to here, {{this.$route.params.account}}</h1>
-      <b-button variant="primary" @click="reset">
-        Log out
-      </b-button>
     </div>
     <div class="container" style="vertical-align: center;"> <br>
       <div>

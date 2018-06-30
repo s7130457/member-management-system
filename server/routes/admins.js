@@ -23,13 +23,31 @@ router.post('/addAdmin', function (req, res) {
         if (result.length == 0) {
             AdminDB.create(req.body).then(function (admin) {
                 console.log(admin)
-                res.send("Add admin=\n" + admin)
+                req.session.token = req.body.account + '_' + redomToken();
+                console.log(req.session);
+                res.send({
+                    code: 200,
+                    token: req.session.token,
+                    admin
+                })
             })
         } else {
             res.status(500).send({ error: 'Repeat Account' });
         }
 
     })
+    function redomToken(len) {
+        var len = len || 32;
+        var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+        var maxpos = chars.length;
+        var str = '';
+
+        for (var i=0; i < len; i++) {
+            str += chars.charAt(Math.floor(Math.random() * maxpos))
+        }
+
+        return str;
+    }
 
 })
 module.exports = router;

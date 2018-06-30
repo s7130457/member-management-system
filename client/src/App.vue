@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <router-link to="/">
-      <img v-b-tooltip.hover title="Home" src="./assets/logo.png">
-    </router-link>
-    <router-view/>
+    <page-header/>
+        <img src="./assets/logo.png">
+      <router-view/>
   </div>
 </template>
 
 <script>
+import PageHeader from '@/components/header.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    PageHeader
+  }
 }
 </script>
 
