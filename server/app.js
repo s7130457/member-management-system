@@ -34,11 +34,9 @@ app.use("*", function (req, res, next) {
 });
 
 app.use(session({  
-  secret: 'backend123...',
-  name: 'backend',
+  secret: 'secret',
   cookie: {
       maxAge: 1000 * 60 * 60 * 24,
-      
   },// 1 day
   resave: true,
   saveUninitialized: true,
@@ -53,5 +51,6 @@ app.use('/members', members);
 app.listen(3100, function () {//告訴server聽取3100這個Port
     console.log('Example app is running on port 3100!');}
 );
+
 
 module.exports = app;
