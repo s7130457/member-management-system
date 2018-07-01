@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const session = require('express-session') 
-// const redisStore = require('connect-redis')(session)
 const app = express(); //建立一個Express伺服器
 
 
@@ -37,24 +36,14 @@ app.use("*", function (req, res, next) {
 app.use(session({  
   secret: 'backend123...',
   name: 'backend',
-  // store: new RedisStore(options),
   cookie: {
       maxAge: 1000 * 60 * 60 * 24,
+      
   },// 1 day
   resave: true,
   saveUninitialized: true,
 }));
-// /**
-//  *  中间件
-//  *  接口请求之后，更新session的时间
-//  *  use this middleware to reset cookie expiration time
-//  *  when user hit page every time
-//  **/
-// app.use(function (req, res, next) {
-//   req.session._garbage = Date();
-//   req.session.touch();
-//   next();
-// });
+
 
 
 app.use('/', index);
@@ -64,7 +53,5 @@ app.use('/members', members);
 app.listen(3100, function () {//告訴server聽取3100這個Port
     console.log('Example app is running on port 3100!');}
 );
-
-
 
 module.exports = app;

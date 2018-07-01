@@ -161,6 +161,7 @@ export default {
         account: '',
         password: ''
       }
+      this.confirmPassword = ''
     }
   }
 }
