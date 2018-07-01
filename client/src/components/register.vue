@@ -148,10 +148,10 @@ export default {
             self.$store.dispatch('setToken', response.data.token)
             self.$store.dispatch('setUser', response.data.admin)
             self.$router.push({path: '/admin/' + self.register.account, params: {account: self.register.account}})
-          }).catch(function (error) {
-            console.error(error)
+          }).catch(function (err) {
+            console.error(err.response)
             self.showOnlyTime = self.showAlertTime
-            self.alert = error.response.data.error
+            self.alert = err.response.data.error
             self.reset()
           })
       }
