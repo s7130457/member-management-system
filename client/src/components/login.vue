@@ -78,15 +78,26 @@ export default {
     doLogin: function () {
       let self = this
       if (!self.login.account || !self.login.password) { return }
-      axios.get('http://localhost:3100/admins/' + this.login.account, this.login)
+      axios.post('http://localhost:3100/login', this.login)
         .then(function (response) {
+<<<<<<< HEAD
           // write login authencation logic here!
           localStorage.setItem('token', 'ImLogin')
           self.$router.push({path: '/admin/' + response.data[0].account, params: {account: response.data[0].account}})
         }).catch(function (error) {
           console.error(error)
+=======
+          console.log(response)
+          self.$store.dispatch('setToken', response.data.token)
+          self.$store.dispatch('setUser', response.data.admin)
+          console.log('store')
+          console.log(self.store)
+          self.$router.push({path: '/admin/' + response.data.admin.account, params: {account: response.data.admin.account}})
+        }).catch(function (err) {
+          // console.error(err.response)
+>>>>>>> 81e6efa241ef093dd3e6dff486e714a5275586eb
           self.showOnlyTime = self.showAlertTime
-          self.alert = 'Account or password error!'
+          self.alert = err.response.data.error
           self.reset()
         })
     },

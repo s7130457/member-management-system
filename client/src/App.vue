@@ -1,15 +1,23 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <router-link to="toPage">
       <img v-b-tooltip.hover title="Home" src="./assets/logo.png">
     </router-link>
     <router-view/>
+=======
+    <page-header/>
+        <img src="./assets/logo.png">
+      <router-view/>
+>>>>>>> 81e6efa241ef093dd3e6dff486e714a5275586eb
   </div>
 </template>
 
 <script>
+import PageHeader from '@/components/header.vue'
 export default {
   name: 'App',
+<<<<<<< HEAD
   data () {
     return {
       isLogin: false
@@ -22,6 +30,10 @@ export default {
 
       }
     }
+=======
+  components: {
+    PageHeader
+>>>>>>> 81e6efa241ef093dd3e6dff486e714a5275586eb
   }
 }
 </script>

@@ -1,16 +1,6 @@
 <template>
   <div class="index">
     <h1>{{ msg }}</h1>
-
-    <ul><br>
-      <li>
-        <b-button  :pressed="false" variant="primary" size="lg" to="/register" >Register</b-button>
-      </li>
-      <li>
-        <b-button  :pressed="false" variant="danger" size="lg" to="/login">Log in</b-button>
-      </li>
-    </ul>
-
   </div>
 </template>
 
