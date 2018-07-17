@@ -9,29 +9,26 @@ import store from '@/store/store'
 
 Vue.config.productionTip = false
 
-<<<<<<< HEAD
 // Vue.use(VueRouter)
 // const router = new VueRouter({
 //   routers,
 //   mode: 'history'
 // })
 
-router.beforeEach((to, from, next) => {
-  const isLogin = localStorage.getItem('token') === 'ImLogin'
-  if (isLogin) {
-    next()
-  } else {
-    if (to.path !== '/login') {
-      next('/login')
-    } else {
-      next()
-    }
-  }
-})
-=======
+// router.beforeEach((to, from, next) => {
+//   const isLogin = localStorage.getItem('token') === 'ImLogin'
+//   if (isLogin) {
+//     next()
+//   } else {
+//     if (to.path !== '/login') {
+//       next('/login')
+//     } else {
+//       next()
+//     }
+//   }
+// })
 sync(store, router)
 
->>>>>>> 81e6efa241ef093dd3e6dff486e714a5275586eb
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
