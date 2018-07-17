@@ -80,6 +80,8 @@ export default {
       if (!self.login.account || !self.login.password) { return }
       axios.get('http://localhost:3100/admins/' + this.login.account, this.login)
         .then(function (response) {
+          // write login authencation logic here!
+          localStorage.setItem('token', 'ImLogin')
           self.$router.push({path: '/admin/' + response.data[0].account, params: {account: response.data[0].account}})
         }).catch(function (error) {
           console.error(error)

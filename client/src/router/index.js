@@ -38,6 +38,10 @@ export default new Router({
       path: '/member/edit/:member_id',
       name: 'editMember',
       component: editMember
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })

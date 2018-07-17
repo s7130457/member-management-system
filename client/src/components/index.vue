@@ -17,10 +17,22 @@
 <script>
 export default {
   name: 'index',
+  ready () {
+
+  },
+  mounted () {
+    this.a()
+  },
   data () {
     return {
-      msg: 'Welcome to Vue.js App'
+      msg: 'Welcome to Vue.js App',
+      isLogin: localStorage.getItem('token') === 'ImLogin'
 
+    }
+  },
+  methods: {
+    a () {
+      console.log(this.isLogin)
     }
   }
 }

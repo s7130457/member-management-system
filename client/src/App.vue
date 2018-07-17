@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-link to="/">
+    <router-link to="toPage">
       <img v-b-tooltip.hover title="Home" src="./assets/logo.png">
     </router-link>
     <router-view/>
@@ -9,7 +9,20 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      isLogin: false
+    }
+  },
+  methods: {
+    toPage () {
+      this.isLogin = localStorage.getItem('token') === 'ImLogin'
+      if (this.isLogin) {
+
+      }
+    }
+  }
 }
 </script>
 
